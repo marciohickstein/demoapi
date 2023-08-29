@@ -9,6 +9,7 @@ describe('GET /users', function () {
             .expect('Content-Type', /json/)
             .expect(200, done);
     });
+
     it('get a specific user', function (done) {
         request(app)
             .get('/users/1')
