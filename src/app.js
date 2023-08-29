@@ -2,28 +2,22 @@ const express = require('express');
 const { normalize } = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-const users = [
-    {id: 1, name: 'marcio' },
-    {id: 2, name: 'claudio' },
-    {id: 3, name: 'leo' },
-]
-
-
+// middlewares
 app.use(cors());
 app.use(morgan());
 app.use(express.json());
 
+// routes
+app.use('/users', userRoutes);
+
 app.get('/', (req, res) => {
     const initialFile = normalize(`${__dirname}/../public/index.html`);
-
     res.sendFile(initialFile);
 })
 
-app.get('/users', (req, res) => {
-    res.json(users);
-})
 
 module.exports = app;
